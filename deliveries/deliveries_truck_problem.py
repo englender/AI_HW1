@@ -188,19 +188,20 @@ class DeliveriesTruckProblem(GraphProblem):
         assert isinstance(state_to_expand, DeliveriesTruckState)
 
         #newcode
+        #yield all successor states. includes pick and drop locations of deliveries waiting to pick,
+        # and drop locations of deliveries in truck
         deliveries_waiting_to_pick = self.get_deliveries_waiting_to_pick(state_to_expand)
         for d in deliveries_waiting_to_pick:
+            #if loading d exceeds the truckCapacity limit, it cannot be loaded
             if state_to_expand.get_total_nr_packages_loaded() + d.nr_packages >  self.problem_input.delivery_truck.max_nr_loaded_packages:
                 continue
             new_state = DeliveriesTruckState(state_to_expand.loaded_deliveries.union(frozenset([d])),state_to_expand.dropped_deliveries,d.pick_location)
             operator_cost = self.map_distance_finder.get_map_cost_between(state_to_expand.current_location, new_state.current_location)
-            #operator_name = "pick" + d.client_name
             yield OperatorResult(new_state, operator_cost, "pick" + d.client_name)
 
         for d in state_to_expand.loaded_deliveries:
             new_state = DeliveriesTruckState(state_to_expand.loaded_deliveries.difference(frozenset([d])), state_to_expand.dropped_deliveries.union(frozenset([d])), d.drop_location)
             operator_cost = self.map_distance_finder.get_map_cost_between(state_to_expand.current_location,new_state.current_location)
-            #operator_name = "drop" + d.client_name
             yield OperatorResult(new_state, operator_cost, "drop" + d.client_name)
 
 
@@ -308,9 +309,12 @@ class DeliveriesTruckProblem(GraphProblem):
         """
 
         #newcode
-        return {d.pick_location for d in self.get_deliveries_waiting_to_pick(state)} | \
-               {d.drop_location for d in self.get_deliveries_waiting_to_pick(state)} | \
-               {d.drop_location for d in state.loaded_deliveries} | {state.current_location}
+        picked_not_loaded = {d.pick_location for d in self.get_deliveries_waiting_to_pick(state)}
+        dropped_not_loaded = {d.drop_location for d in self.get_deliveries_waiting_to_pick(state)}
+        dropped_loaded = {d.drop_location for d in state.loaded_deliveries} | {state.current_location}
+
+        return {state.current_location}.union(picked_not_loaded.union(dropped_loaded.union(dropped_not_loaded)))
+
 
 
 class TruckDeliveriesInnerMapProblemHeuristic(HeuristicFunction):

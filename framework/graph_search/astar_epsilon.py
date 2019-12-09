@@ -73,16 +73,21 @@ class AStarEpsilon(AStar):
         if self.open.is_empty() or self.max_focal_size == 0:
             return None
         focal = []
-        min_f = self._calc_node_expanding_priority(self.open.peek_next_node())
+        #calculate the min expanding-priority
+        min_f = self.open.peek_next_node().expanding_priority
+        #calculate the maximum expanding-priority of the FOCAL
         min_feps = min_f*(1+self.focal_epsilon)
 
+        #insert nodes to focal only with right expanding priority
         while not self.open.is_empty() and self.open.peek_next_node().expanding_priority < min_feps and len(focal) < self.max_focal_size:
             focal.append(self.open.pop_next_node())
         array =[]
         for node in focal:
             array.append(self.within_focal_priority_function(node, problem, self))
         index = np.argmin(array)
+        #extract chosen node from focal
         focal_node = focal.pop(index)
+        # pop back nodes not chosen to open queue
         while len(focal) > 0:
             self.open.push_node(focal.pop())
 

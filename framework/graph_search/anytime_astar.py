@@ -88,6 +88,7 @@ class AnytimeAStar(GraphProblemSolver):
 
                 total_nr_expanded_states += astar_res.nr_expanded_states
                 max_nr_stored_states = max(max_nr_stored_states, astar_res.max_nr_stored_states)
+                #if a solution was found check if it's the best so far
                 if astar_res.is_solution_found:
                     if best_solution.solution_g_cost > astar_res.solution_g_cost:
                         best_solution = astar_res

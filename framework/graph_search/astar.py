@@ -70,16 +70,19 @@ class AStar(BestFirstSearch):
         """
 
         #newcode
+        #if successor_node is in open queue check if needs to be replaced with better priority (=cost)
         if self.open.has_state(successor_node.state):
             already_found_node_with_same_state = self.open.get_node_by_state(successor_node.state)
             if already_found_node_with_same_state.expanding_priority > successor_node.expanding_priority:
                 self.open.extract_node(already_found_node_with_same_state)
 
+        # if successor_node is in close queue check if needs to be inserted to open
         if self.close.has_state(successor_node.state):
             already_found_node_with_same_state = self.close.get_node_by_state(successor_node.state)
             if already_found_node_with_same_state.expanding_priority > successor_node.expanding_priority:
                 self.close.remove_node(already_found_node_with_same_state)
 
+        #insert successor_node to open queue if necessary
         if not self.open.has_state(successor_node.state) and not self.close.has_state(successor_node.state):
             self.open.push_node(successor_node)
 

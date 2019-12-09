@@ -90,24 +90,12 @@ class TruckDeliveriesSumAirDistHeuristic(HeuristicFunction):
         current_junc = state.current_location
         all_junctions_in_remaining_truck_path.remove(current_junc)
         sum = 0
+        #loop to find the path required. for each curr junction finds nearest junction
         while len(all_junctions_in_remaining_truck_path) > 0:
             min_junc=min(all_junctions_in_remaining_truck_path, key=lambda x: self.cached_air_distance_calculator.get_air_distance_between_junctions(x, current_junc))
             sum+=self.cached_air_distance_calculator.get_air_distance_between_junctions(min_junc, current_junc)
             current_junc=min_junc
             all_junctions_in_remaining_truck_path.remove(current_junc)
-
-
-        # all_junctions_in_remaining_truck_path.remove(current_junc)
-        # while len(all_junctions_in_remaining_truck_path) > 0:
-        #     min = sys.maxsize
-        #     for junc in all_junctions_in_remaining_truck_path:
-        #         tmp_min = self.cached_air_distance_calculator.get_air_distance_between_junctions(junc, current_junc)
-        #         if tmp_min < min:
-        #             min = tmp_min
-        #             min_junc = junc
-        #     sum += min
-        #     current_junc = min_junc
-        #     all_junctions_in_remaining_truck_path.remove(current_junc)
 
         total_cost_of_greedily_built_path = sum
 
