@@ -203,27 +203,27 @@ def deliveries_truck_problem_with_astar_experiments():
     #       solve the `moderate_delivery_problem_with_distance_cost` with it and print the results.
 
     #newcode
-    #a_star18 = AStar(TruckDeliveriesMaxAirDistHeuristic)
-    #res = a_star18.solve_problem(moderate_delivery_problem_with_distance_cost)
-    #print(res)
+    a_star18 = AStar(TruckDeliveriesMaxAirDistHeuristic)
+    res = a_star18.solve_problem(moderate_delivery_problem_with_distance_cost)
+    print(res)
 
     # Ex.21
     # TODO: create an instance of `AStar` with the `TruckDeliveriesSumAirDistHeuristic`,
     #       solve the `moderate_delivery_problem_with_distance_cost` with it and print the results.
 
     #newcode
-    #a_star21 = AStar(TruckDeliveriesSumAirDistHeuristic)
-    #res = a_star21.solve_problem(moderate_delivery_problem_with_distance_cost)
-    #print(res)
+    a_star21 = AStar(TruckDeliveriesSumAirDistHeuristic)
+    res = a_star21.solve_problem(moderate_delivery_problem_with_distance_cost)
+    print(res)
 
     # Ex.24
     # TODO: create an instance of `AStar` with the `TruckDeliveriesMSTAirDistHeuristic`,
     #       solve the `moderate_delivery_problem_with_distance_cost` with it and print the results.
 
     #newcode
-    # a_star24 = AStar(TruckDeliveriesMSTAirDistHeuristic)
-    # res = a_star24.solve_problem(moderate_delivery_problem_with_distance_cost)
-    # print(res)
+    a_star24 = AStar(TruckDeliveriesMSTAirDistHeuristic)
+    res = a_star24.solve_problem(moderate_delivery_problem_with_distance_cost)
+    print(res)
 
 def deliveries_truck_problem_with_weighted_astar_experiments():
     print()
@@ -259,9 +259,9 @@ def multiple_objectives_deliveries_truck_problem_experiments():
     #       solve the `small_delivery_problem_with_time_cost` with it and print the results.
 
     # new code
-    # a_star29 = AStar(TruckDeliveriesMSTAirDistHeuristic)
-    # res = a_star29.solve_problem(small_delivery_problem_with_time_cost)
-    # print(res)
+    a_star29 = AStar(TruckDeliveriesMSTAirDistHeuristic)
+    res = a_star29.solve_problem(small_delivery_problem_with_time_cost)
+    print(res)
 
 
     # Ex.29
@@ -269,9 +269,9 @@ def multiple_objectives_deliveries_truck_problem_experiments():
     #       solve the `small_delivery_problem_with_money_cost` with it and print the results.
 
     # new code
-    # a_star29 = AStar(TruckDeliveriesMSTAirDistHeuristic)
-    # res = a_star29.solve_problem(small_delivery_problem_with_money_cost)
-    # print(res)
+    a_star29 = AStar(TruckDeliveriesMSTAirDistHeuristic)
+    res = a_star29.solve_problem(small_delivery_problem_with_money_cost)
+    print(res)
 
 def deliveries_truck_problem_with_astar_epsilon_experiments():
     print()
@@ -281,9 +281,9 @@ def deliveries_truck_problem_with_astar_epsilon_experiments():
     moderate_delivery_problem_with_distance_cost = get_deliveries_problem('moderate', OptimizationObjective.Distance)
 
     # Firstly solve the problem with AStar & MST heuristic for having a reference for #devs.
-    # astar = AStar(TruckDeliveriesMSTAirDistHeuristic)
-    # res = astar.solve_problem(moderate_delivery_problem_with_distance_cost)
-    # print(res)
+    astar = AStar(TruckDeliveriesMSTAirDistHeuristic)
+    res = astar.solve_problem(moderate_delivery_problem_with_distance_cost)
+    print(res)
 
     def within_focal_h_sum_priority_function(node: SearchNode, problem: GraphProblem, solver: AStarEpsilon):
         if not hasattr(solver, '__focal_heuristic'):
@@ -299,9 +299,9 @@ def deliveries_truck_problem_with_astar_epsilon_experiments():
     #       use within_focal_priority_function=within_focal_h_sum_priority_function
 
     #newcode
-    # a_stareps = AStarEpsilon(TruckDeliveriesMSTAirDistHeuristic,within_focal_h_sum_priority_function,focal_epsilon=0.03,max_focal_size=40)
-    # res = a_stareps.solve_problem(moderate_delivery_problem_with_distance_cost)
-    # print(res)
+    a_stareps = AStarEpsilon(TruckDeliveriesMSTAirDistHeuristic,within_focal_h_sum_priority_function,focal_epsilon=0.03,max_focal_size=40)
+    res = a_stareps.solve_problem(moderate_delivery_problem_with_distance_cost)
+    print(res)
 def deliveries_truck_problem_anytime_astar_experiments():
     print()
     print('Solve the truck deliveries problem (moderate input, only distance objective, Anytime-A*, '
