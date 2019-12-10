@@ -45,7 +45,7 @@ def plot_distance_and_expanded_wrt_weight_figure(
 
     #newcode
     p1, = ax1.plot(weights, total_cost, 'b-', label="Solution cost")
-    #ax1.set_title('Solution cost')
+
 
     # ax1: Make the y-axis label, ticks and tick labels match the line color.
     ax1.set_ylabel('solution cost', color='b')
@@ -62,7 +62,7 @@ def plot_distance_and_expanded_wrt_weight_figure(
 
     #newcode
     p2, = ax2.plot(weights, total_nr_expanded, 'r-',  label="#Expanded states")
-    #ax2.set_title('Solution cost')
+
 
     # ax2: Make the y-axis label, ticks and tick labels match the line color.
     ax2.set_ylabel('expanded states', color='r')
@@ -151,7 +151,7 @@ def toy_map_problem_experiments():
     #     with `AirDistHeuristic` and `toy_map_problem`.
 
     #newcode
-    #run_astar_for_weights_in_range(AirDistHeuristic, toy_map_problem)
+    run_astar_for_weights_in_range(AirDistHeuristic, toy_map_problem)
 
 
 # --------------------------------------------------------------------
